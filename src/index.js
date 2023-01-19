@@ -21,12 +21,10 @@ client
   .query({
     query: gql`
       query GetUsers {
-        getUsers {
+        getUsers{
           email
           profile {
-            firstName
-            lastName
-            bio
+            occupation
           }
         }
       }
