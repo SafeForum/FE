@@ -31,6 +31,7 @@ function Login(props) {
 
   const [login, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, { data: { login: userData } }) {
+        console.log("This is user payload", userData)
       context.login(userData);
       navigate("/");
     },
@@ -43,6 +44,7 @@ function Login(props) {
   if (loading) {
     <h1>error loading</h1>;
   }
+
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600">
