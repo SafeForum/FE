@@ -102,7 +102,7 @@ function Navbar() {
               </li>
               <li className="mt-4 lg:mt-0">
                 <Link
-                  to="/"
+                  to="/login"
                   className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
                 >
                   Login
@@ -110,7 +110,7 @@ function Navbar() {
               </li>
               <li className="mt-8 lg:mt-0">
                 <Link
-                  to="/"
+                  to="/register"
                   className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
                 >
                   Sign Up
