@@ -7,33 +7,13 @@ import client from "./apolloClient";
 import { AuthProvider } from "./context/authContext";
 import { ApolloProvider } from "@apollo/client";
 
-//React App needs access to:
-//Client
-// Auth Context
-// Browser Router to /login /register
-
-// client
-//   .query({
-//     query: gql`
-//       query GetUsers {
-//         getUsers{
-//           email
-//           profile {
-//             occupation
-//           }
-//         }
-//       }
-//     `,
-//   })
-//   .then((result) => console.log(result));
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    {/* <AuthProvider> */}
+  <AuthProvider>
     <ApolloProvider client={client}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ApolloProvider>
-    {/* </AuthProvider> */}
-  </BrowserRouter>
+  </AuthProvider>
 );
