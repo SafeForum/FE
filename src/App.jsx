@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage";
-import Navbar from "./Components/navBar";
+import Navbar from "./components/navBar";
 import Login from "./pages/login"
 import Register from "./pages/Register";
 export default function App() {
