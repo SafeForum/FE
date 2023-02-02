@@ -102,7 +102,13 @@ function Login(props) {
               Forgot password?
             </Link>
           </div>
+    
         </form>
+        <button
+    className="px-5 py-3 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg"
+>
+    Signup
+</button>
       </div>
     </main>
   );
