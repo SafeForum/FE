@@ -1,11 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 
 function Navbar() {
+  const { token, logout } = useContext(AuthContext);
+  console.log("This is token: ", token);
+  let navigate = useNavigate();
+
+  const onLogout = () => {
+    logout();
+    navigate("/");
+  };
   const [state, setState] = useState(false);
   const navRef = useRef();
 
-  // Replace javascript:void(0) path with your path
   const navigation = [
     { title: "Customers", path: "/" },
     { title: "Guides", path: "/" },
@@ -93,31 +101,46 @@ function Navbar() {
             state ? "h-screen pb-20 overflow-auto pr-4" : "hidden"
           }`}
         >
-          <div>
-            <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
-              <li className="mt-8 mb-8 lg:mt-0 lg:mb-0">
-                <Link to="/" className="text-gray-600 hover:text-indigo-600">
-                  Contact
-                </Link>
-              </li>
-              <li className="mt-4 lg:mt-0">
-                <Link
-                  to="/login"
-                  className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
-                >
-                  Login
-                </Link>
-              </li>
+          {token ? (
+            <>
+              <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
               <li className="mt-8 lg:mt-0">
-                <Link
-                  to="/register"
-                  className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
-                >
-                  Sign Up
-                </Link>
-              </li>
-            </ul>
-          </div>
+                  <button
+                    onClick={onLogout}
+                    className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              </ul>
+            </>
+          ) : (
+            <div>
+              <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
+                <li className="mt-8 mb-8 lg:mt-0 lg:mb-0">
+                  <Link to="/" className="text-gray-600 hover:text-indigo-600">
+                    Contact
+                  </Link>
+                </li>
+                <li className="mt-4 lg:mt-0">
+                  <Link
+                    to="/login"
+                    className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="mt-8 lg:mt-0">
+                  <Link
+                    to="/register"
+                    className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
           <div className="flex-1">
             <ul className="justify-center items-center space-y-8 lg:flex lg:space-x-6 lg:space-y-0">
               {navigation.map((item, idx) => {
