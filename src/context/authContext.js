@@ -64,18 +64,19 @@ function AuthProvider(props) {
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        token: state.token,
-        userId: state.userId,
-        user: state.user,
-        login,
-        logout,
-      }}
-    >
-      {props.children}
-    </AuthContext.Provider>
-  );
+      <AuthContext.Provider
+        value={{
+          token: state.token,
+          userId: state.userId,
+          user: state.user,
+          login,
+          logout,
+        }}
+      >
+        {props.children}
+      </AuthContext.Provider>
+    );
+  
 }
 
 export { AuthContext, AuthProvider };
