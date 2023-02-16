@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 import Dashboard from "./Dashboard";
 
 const CREATE_USER = gql`
-  mutation CreateUser($userInput: UserInput, $profileInput: ProfileInput) {
+  mutation CreateUser($userInput: UserInput!, $profileInput: ProfileInput) {
     createUser(userInput: $userInput, profileInput: $profileInput) {
       token
       userId
@@ -23,7 +23,7 @@ const Register = (props) => {
 
   useEffect(() => {
     setIsLoading(false);
-    setTimeout(() => {}, 3000);
+    setTimeout(() => {}, 8000);
   },[]);
 
   //dont need context yet
@@ -69,7 +69,7 @@ const Register = (props) => {
   const [login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
       context.login(userData);
-      navigate("/");
+      navigate("/dashboard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -82,8 +82,7 @@ const Register = (props) => {
   });
 
   if (loading) {
-    <h1>error loading</h1>;
-  }
+return <Loading/>  }
 
   return (
     <>

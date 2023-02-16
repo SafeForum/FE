@@ -9,10 +9,10 @@ export default function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/register" exact element={<Register />} />
+        <Route path="/dashboard" exact element={<Dashboard />} />
       </Routes>
     </>
   );
