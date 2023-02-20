@@ -4,7 +4,6 @@ import { useForm } from "../utilities/hooks";
 import { gql, useMutation } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
-import Dashboard from "./Dashboard";
 
 const CREATE_USER = gql`
   mutation CreateUser($userInput: UserInput!, $profileInput: ProfileInput) {
@@ -69,7 +68,7 @@ const Register = (props) => {
   const [login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
       context.login(userData);
-      navigate("/dashboard");
+       navigate("/dashboard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -86,7 +85,7 @@ return <Loading/>  }
 
   return (
     <>
-      {isLoading ? <Loading /> : <Dashboard />}
+       {/* {isLoading ? <Loading /> : <Dashboard />}  */}
 
       <img
         src="https://floatui.com/logo.svg"

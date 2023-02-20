@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../utilities/hooks";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/authContext";
+import Loading from "../components/Loading";
 
 const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
@@ -19,7 +20,13 @@ function Login(props) {
 
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+
+  useEffect(() => {
+    setIsLoading(false);
+    setTimeout(() => {}, 8000);
+  },[]);
   function loginUserCallback() {
     login();
   }
@@ -33,7 +40,7 @@ function Login(props) {
     update(proxy, { data: { login: userData } }) {
         console.log("This is user payload", userData)
       context.login(userData);
-      navigate("/");
+      navigate("/dashoard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -41,9 +48,11 @@ function Login(props) {
     variables: { email: values.email, password: values.password },
   });
 
-  if (loading) {
-    <h1>error loading</h1>;
-  }
+  
+  
+  if(loading){
+    return <Loading />;
+  }  
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
