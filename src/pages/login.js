@@ -40,7 +40,7 @@ function Login(props) {
     update(proxy, { data: { login: userData } }) {
         console.log("This is user payload", userData)
       context.login(userData);
-      navigate("/dashoard");
+      navigate("/dashboard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);

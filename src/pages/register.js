@@ -23,7 +23,7 @@ const Register = (props) => {
   useEffect(() => {
     setIsLoading(false);
     setTimeout(() => {}, 8000);
-  },[]);
+  }, []);
 
   //dont need context yet
   const context = useContext(AuthContext);
@@ -68,7 +68,7 @@ const Register = (props) => {
   const [login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
       context.login(userData);
-       navigate("/dashboard");
+      navigate("/dashboard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -81,11 +81,11 @@ const Register = (props) => {
   });
 
   if (loading) {
-return <Loading/>  }
+    return <Loading />;
+  }
 
   return (
     <>
-       {/* {isLoading ? <Loading /> : <Dashboard />}  */}
 
       <img
         src="https://floatui.com/logo.svg"
@@ -93,7 +93,7 @@ return <Loading/>  }
         className="mx-auto"
         alt="logo"
       />
-      <div className="text-center font-semibold font-serif mt-4">REGISTER</div>
+      <div className=" mb-40 text-center font-semibold font-serif mt-4">REGISTER</div>
       <form onSubmit={onSubmit}>
         <div className="max-w-md px-4 mx-auto mt-12">
           <label htmlFor="email" className="block py-2 text-gray-500">
@@ -130,7 +130,7 @@ return <Loading/>  }
           <input
             name="firstName"
             type="text"
-            placeholder="firstName"
+            placeholder="first name"
             id="firstName"
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             onChange={onChange}
@@ -138,14 +138,14 @@ return <Loading/>  }
           />
         </div>
         <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="lastName" className="block py-2 text-gray-500">
+          <label htmlFor="last name" className="block py-2 text-gray-500">
             lastName
           </label>
 
           <input
             type="text"
             name="lastName"
-            placeholder="lastName"
+            placeholder="last name"
             id="lastName"
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             onChange={onChange}
@@ -162,7 +162,7 @@ return <Loading/>  }
             name="dob"
             type="date"
             placeholder="date of birth"
-            id="dob"
+            id="date of birth"
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             onChange={onChange}
             required
@@ -215,7 +215,7 @@ return <Loading/>  }
           />
         </div>
         <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="state" className="block py-2 text-gray-500">
+          <label htmlFor="bio" className="block py-2 text-gray-500">
             Bio
           </label>
 
@@ -223,17 +223,17 @@ return <Loading/>  }
             name="bio"
             type="text"
             placeholder="bio"
-            id="state"
+            id="bio"
             rows="4"
             col="50"
-            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            className="w-full mb-40 mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             onChange={onChange}
             required
           />
         </div>
 
         <div className="flex justify-center">
-          <button className="mt-5 px-6 py-2 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg">
+          <button className="mt-50 px-6 py-2 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg">
             REGISTER
           </button>
         </div>
