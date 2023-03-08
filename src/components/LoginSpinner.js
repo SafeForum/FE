@@ -3,7 +3,7 @@ import { BallTriangle } from  'react-loader-spinner'
 
 const LoginSpinner = () => {
   return (
-    <div align="center">
+    <div align="centery">
         <BallTriangle
             height="80"
             width="80"
