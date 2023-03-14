@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilities/hooks";
 import { gql, useMutation } from "@apollo/client";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const CREATE_USER = gql`
@@ -86,148 +86,140 @@ const Register = (props) => {
 
   return (
     <>
-      <div className=" mb-40 text-center font-semibold font-serif mt-4">
-      <img
-            src="https://floatui.com/logo.svg"
-            width={150}
-            className="mx-auto"
-            alt="logo"
-          />
-        REGISTER
+      <div className="text-center font-semibold font-serif mt-10">
+        <img
+          src="https://floatui.com/logo.svg"
+          width={150}
+          className="mx-auto font-serif mt-10"
+          alt="logo"
+        />
+        <p className=" mt-10 mx-auto text-center font-bold">Register</p>
       </div>
-      <form onSubmit={onSubmit}>
+      <form>
         <div className="max-w-md px-4 mx-auto">
-          <label htmlFor="email" className="block py-2 text-gray-500">
-            Email
+          <label htmlFor="Email" className="font-medium">
+            email
           </label>
           <input
-            name="email"
             type="text"
-            placeholder="email"
+            name="email"
+            placeholder="Email"
             id="email"
-            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-            required
             onChange={onChange}
+            required
+            size="28"
+            className="mx-auto my-auto w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
-        <div className="max-w-md px-4 mx-auto ">
-          <label htmlFor="password" className="block py-2 text-gray-500">
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="Password" className="font-medium">
             Password
           </label>
           <input
-            name="password"
+            size="24"
             type="password"
-            placeholder="password"
+            name="password"
+            placeholder="Password"
             id="password"
-            className="w-full mt-2 px-3 py-2  bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             onChange={onChange}
             required
+            className="mx-auto my-auto w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
         <div className="max-w-md px-4 mx-auto">
-          <label htmlFor="first name" className="block py-2 text-gray-500">
+          <label htmlFor="First Name" className="font-medium">
             First Name
           </label>
           <input
-            name="first name"
             type="text"
-            placeholder="first name"
-            id="firstName"
-            className="w-full  px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            name="firstName"
+            placeholder="First Name"
+            id=""
             onChange={onChange}
             required
+            size="24"
+            className="mx-auto my-auto w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
         <div className="max-w-md px-4 mx-auto">
-          <label htmlFor="last name" className="block py-2 text-gray-500">
-            lastName
+          <label htmlFor="Last Name" className="font-medium">
+            Last Name
           </label>
-
           <input
+            size="24"
             type="text"
-            name="last name"
+            name="lastName"
             placeholder="last name"
-            id="last name"
-            className="w-full  px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            id="email"
             onChange={onChange}
             required
-          />
-        </div>
-
-        <div className="max-w-md px-4 mx-auto">
-          <label htmlFor="Date of Birth" className="block py-2 text-gray-500">
-            Date of Birth
-          </label>
-
-          <input
-            name="dob"
-            type="date"
-            placeholder="date of birth"
-            id="date of birth"
-            className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-            onChange={onChange}
-            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
         <div className="max-w-md px-4 mx-auto">
-          <label htmlFor="city" className="block py-2 text-gray-500">
+          <label htmlFor="City" className="font-medium">
             City
           </label>
-          <input 
-          type='text'
-          name= 'city'
-          id= 'city'
-          placeholder= 'city'
-          classname="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg "
-          onChange={onChange}
-          required
-    />
-    </div>
-        <div className="max-w-md px-4 mx-auto">
-         <label htmlFor="state" className="block py-2 text-gray-"></label>
           <input
-            name="state"
             type="text"
+            name="city"
+            placeholder="city"
+            id="city"
+            size="28"
+            onChange={onChange}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="State" className="font-medium">
+            State
+          </label>
+          <input
+            type="text"
+            name="state"
             placeholder="state"
             id="state"
-            className="w-full  px-3 py-2w text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            size="28"
             onChange={onChange}
             required
-          />
-        </div>
-
-        <div className="max-w-md px-4 mx-auto ">
-          <label htmlFor="occupation" className="block py-2 text-gray-500">
-            Occupation
-          </label>
-
-          <input
-            name="occupation"
-            type="text"
-            placeholder="occupation"
-            id="occupation"
-            className="w-full  px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-            onChange={onChange}
-            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
         <div className="max-w-md px-4 mx-auto">
-          <label htmlFor="bio" className="block py-2 text-gray-500">
-            Bio
+          <label htmlFor="Occupation" className="font-medium">
+            Occupation
           </label>
+          <input
+            size="24"
+            type="text"
+            name="occupation"
+            placeholder="occupation"
+            id="occupation"
+            onChange={onChange}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="biography" className="font-medium">
+            Biography
+          </label>
+          <br/>
           <textarea
-            textarea=""
-            name="bio"
+            name="biography"
             type="textarea"
-            placeholder="bio"
-            id="bio"
-            rows="6"
-            col="50"
+            placeholder="biography"
+            id="biography"  
             className="w-full mb-40 mt-2 px-3 py-2 text-gray-500
           bg-transparent outline-none border focus:border-indigo-600 shadow-sm
           rounded-lg"
             onChange={onChange}
             required
+    
+    
+
+
           />
         </div>
         <div className="flex justify-center">
