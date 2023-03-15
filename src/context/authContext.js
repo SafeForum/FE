@@ -5,7 +5,9 @@ const initialState = {
   userId: null,
   token: null,
   user: null,
-  tokenExpiration: null
+  userProfile: null,
+  cityPortal: null,
+  tokenExpiration: null,
 };
 
 if (localStorage.getItem("token")) {
@@ -21,6 +23,7 @@ const AuthContext = createContext({
   userId: null,
   token: null,
   user: null,
+  cityPortal: null,
   login: (userData) => {},
   logout: () => {},
 });
@@ -33,6 +36,7 @@ function authReducer(state, action) {
         user: action.payload,
         token: action.payload.token,
         userId: action.payload.userId,
+        cityPortal: action.payload.cityPortal,
       };
     case "LOGOUT":
       return {
@@ -40,6 +44,7 @@ function authReducer(state, action) {
         user: null,
         token: null,
         userId: null,
+        cityPortal: null,
       };
     default:
       return state;
@@ -55,7 +60,6 @@ function AuthProvider(props) {
       type: "LOGIN",
       payload: userData,
     });
-    console.log("Logged In")
   };
 
   function logout() {
@@ -64,19 +68,19 @@ function AuthProvider(props) {
   }
 
   return (
-      <AuthContext.Provider
-        value={{
-          token: state.token,
-          userId: state.userId,
-          user: state.user,
-          login,
-          logout,
-        }}
-      >
-        {props.children}
-      </AuthContext.Provider>
-    );
-  
+    <AuthContext.Provider
+      value={{
+        token: state.token,
+        userId: state.userId,
+        user: state.user,
+        cityPortal: state.cityPortal,
+        login,
+        logout,
+      }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
 
 export { AuthContext, AuthProvider };
