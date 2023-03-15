@@ -11,6 +11,7 @@ const CREATE_USER = gql`
       token
       userId
       tokenExpiration
+      cityPortal
     }
   }
 `;

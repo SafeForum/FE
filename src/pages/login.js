@@ -11,6 +11,7 @@ const LOGIN_USER = gql`
       token
       userId
       tokenExpiration
+      cityPortal
     }
   }
 `;
