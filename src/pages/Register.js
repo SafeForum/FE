@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilities/hooks";
 import { gql, useMutation } from "@apollo/client";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const CREATE_USER = gql`
@@ -20,23 +20,23 @@ const Register = (props) => {
   let navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
+  const { login, currentCityPortal } = useContext(AuthContext);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     setIsLoading(false);
     setTimeout(() => {}, 8000);
-  }, []);
+    if (currentCityPortal) {
+      navigate(`/dashboard/${currentCityPortal}`);
+    }
+  }, [currentCityPortal, navigate]);
 
-  //dont need context yet
-  const context = useContext(AuthContext);
 
-  const [errors, setErrors] = useState([]);
 
   function loginUserCallback() {
-    login();
+    gql_login();
   }
 
-  //1. record values from input here
-  //2. send it in empty, and hook returns with k/v pairs
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     email: "",
     password: "",
@@ -66,10 +66,10 @@ const Register = (props) => {
     occupation: values.occupation,
   };
 
-  const [login, { loading }] = useMutation(CREATE_USER, {
+  const [gql_login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
-      context.login(userData);
-      navigate(`/dashboard/${userData.cityPortal}`);
+      login(userData);
+      setIsLoading(loading)
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -81,7 +81,7 @@ const Register = (props) => {
     },
   });
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -215,6 +215,9 @@ const Register = (props) => {
             required
           />
         </div>
+        {errors.map(function (error) {
+            return <p>{error.message}</p>;
+          })}
         <div className="flex justify-center">
           <button className="px-7 py-4 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 acrtive:shadow">
             REGISTER

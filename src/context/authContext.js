@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from "react";
+import React, { useReducer, createContext, useState } from "react";
 import jwtDecode from "jwt-decode";
 
 const initialState = {
@@ -23,7 +23,7 @@ const AuthContext = createContext({
   userId: null,
   token: null,
   user: null,
-  cityPortal: null,
+  currentCityPortal:  null,
   login: (userData) => {},
   logout: () => {},
 });
@@ -36,7 +36,6 @@ function authReducer(state, action) {
         user: action.payload,
         token: action.payload.token,
         userId: action.payload.userId,
-        cityPortal: action.payload.cityPortal,
       };
     case "LOGOUT":
       return {
@@ -44,7 +43,6 @@ function authReducer(state, action) {
         user: null,
         token: null,
         userId: null,
-        cityPortal: null,
       };
     default:
       return state;
@@ -53,9 +51,11 @@ function authReducer(state, action) {
 
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
+const [ currentCityPortal, setCurrentCityPortal ] = useState(state.cityPortal)
 
   const login = (userData) => {
     localStorage.setItem("token", userData.token);
+    setCurrentCityPortal(userData.cityPortal);
     dispatch({
       type: "LOGIN",
       payload: userData,
@@ -64,6 +64,7 @@ function AuthProvider(props) {
 
   function logout() {
     localStorage.removeItem("token");
+setCurrentCityPortal(null)
     dispatch({ type: "LOGOUT" });
   }
 
@@ -73,9 +74,9 @@ function AuthProvider(props) {
         token: state.token,
         userId: state.userId,
         user: state.user,
-        cityPortal: state.cityPortal,
         login,
         logout,
+        currentCityPortal,
       }}
     >
       {props.children}
