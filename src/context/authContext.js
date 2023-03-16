@@ -24,7 +24,7 @@ const AuthContext = createContext({
   userId: null,
   token: null,
   user: null,
-  cityPortal: null,
+  currentCityPortal:  null,
   login: (userData) => {},
   logout: () => {},
 });
@@ -74,9 +74,10 @@ function AuthContextProvider(props) {
         token: state.token,
         userId: state.userId,
         user: state.user,
-        cityPortal: localStorage.getItem("cityPortal"),
+        cityPortal: state.cityPortal,
         login,
         logout,
+        currentCityPortal,
       }}
     >
       {props.children}
