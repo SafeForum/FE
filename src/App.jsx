@@ -12,7 +12,7 @@ export default function App() {
         <Route exact path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" exact element={<Register />} />
-        <Route path="/dashboard" exact element={<Dashboard />} />
+        <Route path="/dashboard/:cityPortal" element={<Dashboard />} />
       </Routes>
     </>
   );

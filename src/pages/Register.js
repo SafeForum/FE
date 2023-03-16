@@ -69,7 +69,7 @@ const Register = (props) => {
   const [login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
       context.login(userData);
-      navigate("/dashboard");
+      navigate(`/dashboard/${userData.cityPortal}`);
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
