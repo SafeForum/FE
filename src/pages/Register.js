@@ -98,7 +98,7 @@ const Register = (props) => {
       <form>
         <div className="max-w-md px-4 mx-auto">
           <label htmlFor="Email" className="font-medium">
-            email
+            Email
           </label>
           <input
             type="text"
