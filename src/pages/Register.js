@@ -11,6 +11,7 @@ const CREATE_USER = gql`
       token
       userId
       tokenExpiration
+      cityPortal
     }
   }
 `;
@@ -19,23 +20,23 @@ const Register = (props) => {
   let navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
+  const { login, currentCityPortal } = useContext(AuthContext);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     setIsLoading(false);
     setTimeout(() => {}, 8000);
-  }, []);
+    if (currentCityPortal) {
+      navigate(`/dashboard/${currentCityPortal}`);
+    }
+  }, [currentCityPortal, navigate]);
 
-  //dont need context yet
-  const context = useContext(AuthContext);
 
-  const [errors, setErrors] = useState([]);
 
   function loginUserCallback() {
-    login();
+    gql_login();
   }
 
-  //1. record values from input here
-  //2. send it in empty, and hook returns with k/v pairs
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     email: "",
     password: "",
@@ -65,10 +66,10 @@ const Register = (props) => {
     occupation: values.occupation,
   };
 
-  const [login, { loading }] = useMutation(CREATE_USER, {
+  const [gql_login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
-      context.login(userData);
-      navigate("/dashboard");
+      login(userData);
+      setIsLoading(loading)
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -80,7 +81,7 @@ const Register = (props) => {
     },
   });
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -222,6 +223,9 @@ const Register = (props) => {
 
           />
         </div>
+        {errors.map(function (error) {
+            return <p>{error.message}</p>;
+          })}
         <div className="flex justify-center">
           <button className="px-7 py-4 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 acrtive:shadow">
             REGISTER

@@ -4,7 +4,6 @@ import { AuthContext } from "../context/authContext";
 
 function Navbar() {
   const { token, logout } = useContext(AuthContext);
-  console.log("This is token: ", token);
   let navigate = useNavigate();
 
   const onLogout = () => {

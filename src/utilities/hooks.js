@@ -8,7 +8,6 @@ export const useForm = (callback, initialState = {}) => {
     //target.name is what you `name="email"` your text boxes
     //it records the value according to the name
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log("These are values: ", values);
   };
 
   const onSubmit = (event) => {

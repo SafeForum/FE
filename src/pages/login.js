@@ -11,6 +11,7 @@ const LOGIN_USER = gql`
       token
       userId
       tokenExpiration
+      cityPortal
     }
   }
 `;
@@ -18,16 +19,21 @@ const LOGIN_USER = gql`
 function Login(props) {
   let navigate = useNavigate();
 
-  const context = useContext(AuthContext);
+  const { login, cityPortal } = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     setIsLoading(false);
     setTimeout(() => {}, 8000);
-  }, []);
+    if (cityPortal) {
+      navigate(`/dashboard/${cityPortal}`);
+    }
+  }, [cityPortal, navigate]);
+
   function loginUserCallback() {
-    login();
+    gql_login();
   }
 
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
@@ -35,11 +41,10 @@ function Login(props) {
     password: "",
   });
 
-  const [login, { loading }] = useMutation(LOGIN_USER, {
+  const [gql_login, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, { data: { login: userData } }) {
-      console.log("This is user payload", userData);
-      context.login(userData);
-      navigate("/dashboard");
+      login(userData);
+      setIsLoading(loading);
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -47,12 +52,12 @@ function Login(props) {
     variables: { email: values.email, password: values.password },
   });
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
   return (
-  < main  className="w-full h-screen flex flex-col items-center justify-center px-4">
+    <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600">
         <div className="text-center">
           <img
