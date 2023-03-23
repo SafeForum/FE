@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../utilities/hooks";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/authContext";
+import Loading from "../components/Loading";
 
 const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
@@ -19,7 +20,12 @@ function Login(props) {
 
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    setIsLoading(false);
+    setTimeout(() => {}, 8000);
+  }, []);
   function loginUserCallback() {
     login();
   }
@@ -31,9 +37,9 @@ function Login(props) {
 
   const [login, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, { data: { login: userData } }) {
-        console.log("This is user payload", userData)
+      console.log("This is user payload", userData);
       context.login(userData);
-      navigate("/");
+      navigate("/dashboard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -42,11 +48,11 @@ function Login(props) {
   });
 
   if (loading) {
-    <h1>error loading</h1>;
+    return <Loading />;
   }
 
   return (
-    <main className="w-full h-screen flex flex-col items-center justify-center px-4">
+  < main  className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600">
         <div className="text-center">
           <img
@@ -104,13 +110,10 @@ function Login(props) {
               Forgot password?
             </Link>
           </div>
-    
         </form>
-        <button
-    className="px-5 py-3 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg"
->
-    Signup
-</button>
+        <button className="px-5 py-3 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg">
+          Signup
+        </button>
       </div>
     </main>
   );

@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilities/hooks";
 import { gql, useMutation } from "@apollo/client";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const CREATE_USER = gql`
-  mutation CreateUser($userInput: UserInput, $profileInput: ProfileInput) {
+  mutation CreateUser($userInput: UserInput!, $profileInput: ProfileInput) {
     createUser(userInput: $userInput, profileInput: $profileInput) {
       token
       userId
@@ -16,6 +17,13 @@ const CREATE_USER = gql`
 
 const Register = (props) => {
   let navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setTimeout(() => {}, 8000);
+  }, []);
 
   //dont need context yet
   const context = useContext(AuthContext);
@@ -60,7 +68,7 @@ const Register = (props) => {
   const [login, { loading }] = useMutation(CREATE_USER, {
     update(proxy, { data: { createUser: userData } }) {
       context.login(userData);
-      navigate("/");
+      navigate("/dashboard");
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
@@ -73,170 +81,150 @@ const Register = (props) => {
   });
 
   if (loading) {
-    <h1>error loading</h1>;
+    return <Loading />;
   }
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="email" className="block py-2 text-gray-500">
+      <div className="text-center font-semibold font-serif mt-10">
+        <img
+          src="https://floatui.com/logo.svg"
+          width={150}
+          className="mx-auto font-serif mt-10"
+          alt="logo"
+        />
+        <p className=" mt-10 mx-auto text-center font-bold">Register</p>
+      </div>
+      <form>
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="Email" className="font-medium">
             Email
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="email"
-              type="text"
-              placeholder="email"
-              id="email"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              required
-              onChange={onChange}
-            />
-          </div>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            id="email"
+            onChange={onChange}
+            required
+            size="28"
+            className="mx-auto my-auto w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="password" className="block py-2 text-gray-500">
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="Password" className="font-medium">
             Password
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="password"
-              type="text"
-              placeholder="passwor"
-              id="password"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            size="24"
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+            onChange={onChange}
+            required
+            className="mx-auto my-auto w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="firstName" className="block py-2 text-gray-500">
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="First Name" className="font-medium">
             First Name
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="firstName"
-              type="text"
-              placeholder="firstName"
-              id="firstName"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            id=""
+            onChange={onChange}
+            required
+            size="24"
+            className="mx-auto my-auto w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="lastName" className="block py-2 text-gray-500">
-            lastName
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="Last Name" className="font-medium">
+            Last Name
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="lastName"
-              id="lastName"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            size="24"
+            type="text"
+            name="lastName"
+            placeholder="last name"
+            id="email"
+            onChange={onChange}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="Date of Birth" className="block py-2 text-gray-500">
-            Date of Birth
-          </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="dob"
-              type="date"
-              placeholder="dob"
-              id="dob"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
-        </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="city" className="block py-2 text-gray-500">
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="City" className="font-medium">
             City
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="city"
-              type="text"
-              placeholder="city"
-              id="city"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            type="text"
+            name="city"
+            placeholder="city"
+            id="city"
+            size="28"
+            onChange={onChange}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="state" className="block py-2 text-gray-500">
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="State" className="font-medium">
             State
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="state"
-              type="text"
-              placeholder="state"
-              id="state"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            type="text"
+            name="state"
+            placeholder="state"
+            id="state"
+            size="28"
+            onChange={onChange}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="occupation" className="block py-2 text-gray-500">
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="Occupation" className="font-medium">
             Occupation
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <input
-              name="occupation"
-              type="text"
-              placeholder="occupation"
-              id="occupation"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            size="24"
+            type="text"
+            name="occupation"
+            placeholder="occupation"
+            id="occupation"
+            onChange={onChange}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
         </div>
-        <div className="max-w-md px-4 mx-auto mt-12">
-          <label htmlFor="state" className="block py-2 text-gray-500">
-            Bio
+        <div className="max-w-md px-4 mx-auto">
+          <label htmlFor="biography" className="font-medium">
+            Biography
           </label>
-          <div className="flex items-center text-gray-400 border rounded-md">
-            <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r"></div>
-            <textarea
-              name="bio"
-              type="text"
-              placeholder="bio"
-              id="state"
-              rows="4"
-              col="50"
-              className="w-full p-2.5 ml-2 bg-transparent outline-none"
-              onChange={onChange}
-              required
-            />
-          </div>
+          <br/>
+          <textarea
+            name="biography"
+            type="textarea"
+            placeholder="biography"
+            id="biography"  
+            className="w-full mb-40 mt-2 px-3 py-2 text-gray-500
+          bg-transparent outline-none border focus:border-indigo-600 shadow-sm
+          rounded-lg"
+            onChange={onChange}
+            required
+    
+    
+
+
+          />
         </div>
         <div className="flex justify-center">
-          <button className="px-5 py-3 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg">
-            Signup
+          <button className="px-7 py-4 text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 acrtive:shadow">
+            REGISTER
           </button>
         </div>
       </form>
