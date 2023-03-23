@@ -14,6 +14,7 @@ if (localStorage.getItem("token")) {
   const decodedToken = jwtDecode(localStorage.getItem("token"));
   if (decodedToken.exp * 1000 < Date.now()) {
     localStorage.removeItem("token");
+    localStorage.removeItem("cityPortal");
   } else {
     initialState.token = decodedToken;
   }
@@ -23,7 +24,7 @@ const AuthContext = createContext({
   userId: null,
   token: null,
   user: null,
-  currentCityPortal:  null,
+  cityPortal: null,
   login: (userData) => {},
   logout: () => {},
 });
@@ -49,13 +50,12 @@ function authReducer(state, action) {
   }
 }
 
-function AuthProvider(props) {
-  const [state, dispatch] = useReducer(authReducer, initialState);
-const [ currentCityPortal, setCurrentCityPortal ] = useState(state.cityPortal)
+function AuthContextProvider(props) {
+  const [state, dispatch] = useReducer(authReducer, initialState)
 
   const login = (userData) => {
     localStorage.setItem("token", userData.token);
-    setCurrentCityPortal(userData.cityPortal);
+    localStorage.setItem("cityPortal", userData.cityPortal);
     dispatch({
       type: "LOGIN",
       payload: userData,
@@ -64,7 +64,7 @@ const [ currentCityPortal, setCurrentCityPortal ] = useState(state.cityPortal)
 
   function logout() {
     localStorage.removeItem("token");
-setCurrentCityPortal(null)
+    localStorage.removeItem("cityPortal");
     dispatch({ type: "LOGOUT" });
   }
 
@@ -74,9 +74,9 @@ setCurrentCityPortal(null)
         token: state.token,
         userId: state.userId,
         user: state.user,
+        cityPortal: localStorage.getItem("cityPortal"),
         login,
         logout,
-        currentCityPortal,
       }}
     >
       {props.children}
@@ -84,4 +84,4 @@ setCurrentCityPortal(null)
   );
 }
 
-export { AuthContext, AuthProvider };
+export { AuthContext, AuthContextProvider };

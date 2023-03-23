@@ -4,16 +4,19 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import client from "./apolloClient";
-import { AuthProvider } from "./context/authContext";
+import { AuthContextProvider } from "./context/authContext";
 import { ApolloProvider } from "@apollo/client";
+import { DashContextProvider } from "./context/dashContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthProvider>
+  <AuthContextProvider>
+    <DashContextProvider>
     <ApolloProvider client={client}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </ApolloProvider>
-  </AuthProvider>
+    </DashContextProvider>
+  </AuthContextProvider>
 );
