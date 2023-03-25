@@ -19,7 +19,7 @@ const LOGIN_USER = gql`
 function Login(props) {
   let navigate = useNavigate();
 
-  const { login, currentCityPortal } = useContext(AuthContext);
+  const { login, cityPortal } = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,10 +27,10 @@ function Login(props) {
   useEffect(() => {
     setIsLoading(false);
     setTimeout(() => {}, 8000);
-    if (currentCityPortal) {
-      navigate(`/dashboard/${currentCityPortal}`);
+    if (cityPortal) {
+      navigate(`/dashboard/${cityPortal}`);
     }
-  }, [currentCityPortal, navigate]);
+  }, [cityPortal, navigate]);
 
   function loginUserCallback() {
     gql_login();
@@ -44,7 +44,7 @@ function Login(props) {
   const [gql_login, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, { data: { login: userData } }) {
       login(userData);
-      setIsLoading(loading)
+      setIsLoading(loading);
     },
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);

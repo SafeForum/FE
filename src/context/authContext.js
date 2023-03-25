@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useState } from "react";
+import React, { useReducer, createContext } from "react";
 import jwtDecode from "jwt-decode";
 
 const initialState = {
@@ -24,7 +24,7 @@ const AuthContext = createContext({
   userId: null,
   token: null,
   user: null,
-  currentCityPortal:  null,
+  cityPortal: null,
   login: (userData) => {},
   logout: () => {},
 });
@@ -74,10 +74,9 @@ function AuthContextProvider(props) {
         token: state.token,
         userId: state.userId,
         user: state.user,
-        cityPortal: state.cityPortal,
+        cityPortal: localStorage.getItem("cityPortal"),
         login,
         logout,
-        currentCityPortal,
       }}
     >
       {props.children}
