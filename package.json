@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@emailjs/browser": "^3.10.0",
     "@headlessui/react": "^1.7.8",
     "@heroicons/react": "^2.0.14",
     "@testing-library/jest-dom": "^5.16.5",
