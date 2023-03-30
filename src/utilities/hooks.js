@@ -2,7 +2,6 @@ import { useState } from "react";
 
 export const useForm = (callback, initialState = {}) => {
   const [values, setValues] = useState(initialState);
-
   const onChange = (event) => {
     //accepts event, and spreads target.name according to target.value
     //target.name is what you `name="email"` your text boxes
@@ -20,4 +19,5 @@ export const useForm = (callback, initialState = {}) => {
     onSubmit,
     values,
   };
+  
 };
