@@ -7,7 +7,7 @@ import { useForm } from "../utilities/hooks";
 const NewCityForm = (e)=> {
     const form = useRef();
     const [rating, setRating] = useState(0); 
-    const [communityInvolvement, setCommunityInvolvement] = useState(null);
+    const [activeMember, setActiveMember] = useState(null);
 
     function cityApplicationCallback(e) {
         sendEmail(e);
@@ -21,7 +21,7 @@ const NewCityForm = (e)=> {
         city: "",
         state: "",
         rating,
-        communityInvolvement
+        activeMember
       }
       );
     
@@ -132,9 +132,9 @@ const NewCityForm = (e)=> {
                     <input 
                     className="m-2"
                     type="radio" 
-                    name="communityInvolvement" 
+                    name="activeMember" 
                     value="true"  
-                    checked={communityInvolvement === true}
+                    checked={activeMember === true}
                     onChange={onChange}  />
                     Yes
                     </label>
@@ -142,9 +142,9 @@ const NewCityForm = (e)=> {
                     <input
                     className="m-2" 
                     type="radio" 
-                    name="communityInvolvement" 
+                    name="activeMember" 
                     value="false" 
-                    checked={communityInvolvement === false}
+                    checked={activeMember === false}
                     onChange={onChange} />
                     No
                     </label>
