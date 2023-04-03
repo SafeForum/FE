@@ -80,7 +80,7 @@ const NewCityForm = (e)=> {
                         name="rating"
                         id="1"  
                         value="1"  
-                        checked={rating === 1}
+                        defaultChecked={rating === 1}
                         onChange={onChange} 
                         className="m-2"/>
                         1
@@ -91,7 +91,7 @@ const NewCityForm = (e)=> {
                         name="rating"
                         id="2"  
                         value="2" 
-                        checked={rating === 2}
+                        defaultChecked={rating === 2}
                         onChange={onChange} 
                         className="m-2"/>
                         2
@@ -102,7 +102,7 @@ const NewCityForm = (e)=> {
                         name="rating"
                         id="3"  
                         value="3" 
-                        checked={rating === 3}
+                        defaultChecked={rating === 3}
                         onChange={onChange} 
                         className="m-2"/>
                         3
@@ -113,7 +113,7 @@ const NewCityForm = (e)=> {
                         name="rating"
                         id="4"  
                         value="4" 
-                        checked={rating === 4}
+                        defaultChecked={rating === 4}
                         onChange={onChange} 
                         className="m-2"/>
                         4
@@ -124,7 +124,7 @@ const NewCityForm = (e)=> {
                         name="rating"
                         id="5"  
                         value="5"  
-                        checked={rating === 5}
+                        defaultChecked={rating === 5}
                         onChange={onChange} 
                         className="m-2"/>
                         5
@@ -139,7 +139,7 @@ const NewCityForm = (e)=> {
                     name="activeMember"
                     id="true"   
                     value="true"  
-                    checked={activeMember === true}
+                    defaultChecked={activeMember === true}
                     onChange={onChange}  />
                     Yes
                     </label>
@@ -150,7 +150,7 @@ const NewCityForm = (e)=> {
                     name="activeMember"
                     id="false"  
                     value="false" 
-                    checked={activeMember === false}
+                    defaultChecked={activeMember === false}
                     onChange={onChange} />
                     No
                     </label>
