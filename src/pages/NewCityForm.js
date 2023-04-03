@@ -11,7 +11,6 @@ const NewCityForm = (e)=> {
 
     function cityApplicationCallback(e) {
         sendEmail(e);
-        console.log(values)
       }
 
     const { onChange, onSubmit, values } = useForm(cityApplicationCallback, {
@@ -24,7 +23,7 @@ const NewCityForm = (e)=> {
         activeMember
       }
       );
-    
+    console.log(values.activeMember)
 
     const sendEmail = (e) => {
       e.preventDefault();
@@ -75,50 +74,55 @@ const NewCityForm = (e)=> {
                 className="w-1/3 mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
                 <label className="font-medium">On a scale of 1 to 5, how involved are you in your community?</label>
                 <div>
-                    <label className="m-4">
+                    <label className="m-4" htmlFor="1">
                         <input 
                         type="radio" 
-                        name="rating" 
+                        name="rating"
+                        id="1"  
                         value="1"  
                         checked={rating === 1}
                         onChange={onChange} 
                         className="m-2"/>
                         1
                     </label>
-                    <label className="m-4">
+                    <label className="m-4" htmlFor="2">
                         <input 
                         type="radio" 
-                        name="rating" 
+                        name="rating"
+                        id="2"  
                         value="2" 
                         checked={rating === 2}
                         onChange={onChange} 
                         className="m-2"/>
                         2
                     </label>
-                    <label className="m-4">
+                    <label className="m-4" htmlFor="3">
                         <input 
                         type="radio" 
-                        name="rating" 
+                        name="rating"
+                        id="3"  
                         value="3" 
                         checked={rating === 3}
                         onChange={onChange} 
                         className="m-2"/>
                         3
                     </label>
-                    <label className="m-4">
+                    <label className="m-4" htmlFor="4">
                         <input 
                         type="radio" 
-                        name="rating" 
+                        name="rating"
+                        id="4"  
                         value="4" 
                         checked={rating === 4}
                         onChange={onChange} 
                         className="m-2"/>
                         4
                     </label>
-                    <label className="m-4">
+                    <label className="m-4" htmlFor="5">
                         <input 
                         type="radio" 
-                        name="rating" 
+                        name="rating"
+                        id="5"  
                         value="5"  
                         checked={rating === 5}
                         onChange={onChange} 
@@ -128,21 +132,23 @@ const NewCityForm = (e)=> {
                 </div>
                 <label className="font-medium">Are you an active member in your community?</label>
                 <div>
-                    <label>
+                    <label htmlFor="true">
                     <input 
                     className="m-2"
                     type="radio" 
-                    name="activeMember" 
+                    name="activeMember"
+                    id="true"   
                     value="true"  
                     checked={activeMember === true}
                     onChange={onChange}  />
                     Yes
                     </label>
-                    <label>
+                    <label htmlFor="false">
                     <input
                     className="m-2" 
                     type="radio" 
-                    name="activeMember" 
+                    name="activeMember"
+                    id="false"  
                     value="false" 
                     checked={activeMember === false}
                     onChange={onChange} />
