@@ -4,6 +4,7 @@ import { AuthContext } from "../context/authContext";
 import { DashContext, DashContextProvider } from "../context/dashContext";
 import GET_SINGLE_PORTAL from "../ApolloClient/gql/cityPortal";
 import DashboardStatus from "../components/messageBoard/DashboardStatus";
+import { GetCityPortal } from "../ApolloClient/queries/dashboardQueries";
 
 // What do we want to view on the dashboard?
 // 1. messageboard
@@ -18,23 +19,24 @@ const Dashboard = () => {
   const { cityPortal } = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
 
-  const { loading, error, data } = useQuery(GET_SINGLE_PORTAL, {
-    variables: {
-      portalId: cityPortal,
-    },
-    onCompleted: (data) => {
-      getPortalData(data.getSingleCityPortal);
-    },
-  });
 
-  if (loading) {
-    return "We stay loading";
-  }
+  // const { loading, error, data } = useQuery(GET_SINGLE_PORTAL, {
+  //   variables: {
+  //     portalId: cityPortal,
+  //   },
+  //   onCompleted: (data) => {
+  //     getPortalData(data.getSingleCityPortal);
+  //   },
+  // });
+
+  // if (loading) {
+  //   return "We stay loading";
+  // }
 
   return (
-      <div>
-        <DashboardStatus />
-      </div>
+    <div>
+      <DashboardStatus />
+    </div>
   );
 };
 
