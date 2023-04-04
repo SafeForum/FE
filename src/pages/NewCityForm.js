@@ -2,12 +2,14 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useForm } from "../utilities/hooks";
+import { useNavigate } from "react-router-dom";
 
 
 const NewCityForm = (e)=> {
     const form = useRef();
     const [rating, setRating] = useState(0); 
     const [activeMember, setActiveMember] = useState(null);
+    let navigate = useNavigate();
 
     function cityApplicationCallback(e) {
         sendEmail(e);
@@ -27,9 +29,11 @@ const NewCityForm = (e)=> {
 
     const sendEmail = (e) => {
       e.preventDefault();
+    
   
       emailjs.sendForm("service_x85or0c", 'template_ao0ciog', form.current, 'nUlpMk4P_OPmU829T')
         .then((result) => {
+            navigate(`/form-success`)
             console.log(result.text);
         }, (error) => {
             console.log(error.text);
