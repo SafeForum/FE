@@ -7,7 +7,7 @@ import GET_SINGLE_PORTAL from "../../ApolloClient/gql/cityPortal";
 
 //Get Dashboard
 export const GetCityPortal = (cityPortal) => {
-  console.log(cityPortal);
+  console.log("This is cityPortal data: ", cityPortal);
   const { getPortalData } = useContext(DashContext);
   const { loading, error, data } = useQuery(GET_SINGLE_PORTAL, {
     variables: {

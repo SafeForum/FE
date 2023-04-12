@@ -18,7 +18,7 @@ const DashContext = createContext({
 });
 
 function dashReducer(state, action) {
-  console.log("This is state: ", action)
+
   switch (action.type) {
     case "PORTAL_DATA":
       return {

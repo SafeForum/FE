@@ -5,18 +5,23 @@ export const GET_MESSAGE_BOARD = gql`
     getMessageBoard(messageBoardId: $messageBoardId) {
       _id
       threads {
-        _id
+        subject
+        creator {
+          _id
+          firstName
+          lastName
+        }
       }
       cityPortal {
         _id
       }
     }
-}
+  }
 `;
 
 export const GET_THREADS = gql`
-query GetThreads($messageBoardId: String!) {
-    getThreads(messageBoardId: $messageBoardId ) {
+  query GetThreads($messageBoardId: String!) {
+    getThreads(messageBoardId: $messageBoardId) {
       _id
       messageBoard {
         _id
@@ -25,15 +30,16 @@ query GetThreads($messageBoardId: String!) {
       body
       creator {
         firstName
+lastName
       }
       createdAt
       updatedAt
-      comments{
+      comments {
         _id
         likes {
           _id
         }
       }
     }
-}
+  }
 `;

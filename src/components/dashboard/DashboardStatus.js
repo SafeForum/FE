@@ -1,5 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { AuthContext } from "../../context/authContext";
 import { DashContext } from "../../context/dashContext";
+import GET_SINGLE_PORTAL from "../../ApolloClient/gql/queries/cityPortal";
 
 // What do we want to view on the dashboard status view?
 // 1. display city and state name
@@ -10,7 +13,7 @@ import { DashContext } from "../../context/dashContext";
 
 const DashboardStatus = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { city, state, users, messageBoardId } =
+  const { city, state, users } =
     useContext(DashContext);
   const [errors, setErrors] = useState([]);
 
