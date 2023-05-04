@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 export const GET_MESSAGE_BOARD = gql`
   query GetMessageBoard($messageBoardId: String!) {
     getMessageBoard(messageBoardId: $messageBoardId) {
-      _id
       threads {
         subject
         creator {
@@ -11,9 +10,6 @@ export const GET_MESSAGE_BOARD = gql`
           firstName
           lastName
         }
-      }
-      cityPortal {
-        _id
       }
     }
   }
@@ -30,7 +26,7 @@ export const GET_THREADS = gql`
       body
       creator {
         firstName
-lastName
+        lastName
       }
       createdAt
       updatedAt

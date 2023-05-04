@@ -1,24 +1,20 @@
 import React, { useReducer, createContext, useState } from "react";
 
 const initialState = {
-  threads: [],
-  id: null,
+  threads: null,
 };
 
 const MessageBoardContext = createContext({
   threads: [],
-  id: null,
   getMessageBoardData: (messageBoardData) => {},
 });
 
 function messageBoardReducer(state, action) {
-  console.log("This is state: ", action);
   switch (action.type) {
-    case "PORTAL_DATA":
+    case "MB_DATA":
       return {
         ...state,
         threads: action.payload.threads,
-        id: action.payload._id,
       };
     default:
       return state;
@@ -28,16 +24,16 @@ function messageBoardReducer(state, action) {
 function MessageBoardContextProvider(props) {
     const [state, dispatch] = useReducer(messageBoardReducer, initialState);
 
-    const getMessageBoardData = (portalData) => {
+    const getMessageBoardData = (messageBoardData) => {
+
       dispatch({
-        type: "PORTAL_DATA",
-        payload: portalData,
+        type: "MB_DATA",
+        payload: messageBoardData,
       });
     };
 
     const value = {
         threads: state.threads,
-        id: state._id,
         getMessageBoardData,
     }
 

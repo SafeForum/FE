@@ -7,16 +7,19 @@ import client from "./apolloClient";
 import { AuthContextProvider } from "./context/authContext";
 import { ApolloProvider } from "@apollo/client";
 import { DashContextProvider } from "./context/dashContext";
+import { MessageBoardContextProvider } from "./context/messageBoardContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <DashContextProvider>
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProvider>
-    </DashContextProvider>
-  </AuthContextProvider>
+  <ApolloProvider client={client}>
+    <AuthContextProvider>
+      <DashContextProvider>
+        <MessageBoardContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </MessageBoardContextProvider>
+      </DashContextProvider>
+    </AuthContextProvider>
+  </ApolloProvider>
 );

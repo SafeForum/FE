@@ -1,25 +1,33 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { AuthContext } from "../../context/authContext";
 import { DashContext } from "../../context/dashContext";
 import { GET_MESSAGE_BOARD } from "../../ApolloClient/gql/queries/messageBoard";
+import { MessageBoardContext } from "../../context/messageBoardContext";
+import Threads from "./Threads";
 
 const MessageBoard = () => {
   const { messageBoardId } = useContext(DashContext);
+  const { getMessageBoardData, threads } = useContext(MessageBoardContext);
 
-  const { loading, error, data } = useQuery(GET_MESSAGE_BOARD, {
+  const { loading, error, data} = useQuery(GET_MESSAGE_BOARD, {
     variables: {
       messageBoardId: messageBoardId,
     },
     onCompleted: (data) => {
-      console.log("This is messageBoard data: ", data);
+      console.log("MB DATA: ", data.getMessageBoard)
+      getMessageBoardData(data.getMessageBoard);
     },
   });
   if (loading) {
     return "We stay loading";
   }
-  console.log(data);
-  return <div>This is the messageboard</div>;
+
+  return (
+    <div>
+      <h1>MessageBoard</h1>
+      <Threads threads={threads} />
+    </div>
+  );
 };
 
 export default MessageBoard;

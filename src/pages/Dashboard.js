@@ -16,7 +16,7 @@ import MessageBoard from "../components/dashboard/MessageBoard";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { getPortalData } = useContext(DashContext);
-  const { cityPortal } = useContext(AuthContext);
+  const { cityPortal, userId } = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
 
   const { loading, error, data } = useQuery(GET_SINGLE_PORTAL, {
@@ -24,6 +24,7 @@ const Dashboard = () => {
       portalId: cityPortal,
     },
     onCompleted: (data) => {
+      console.log("USER DATA: ", data.getSingleCityPortal)
       getPortalData(data.getSingleCityPortal);
     },
   });
@@ -33,7 +34,7 @@ const Dashboard = () => {
   }
 
   return (
-      <div>
+      <div className="w-10/12 mx-auto">
         <DashboardStatus />
         <MessageBoard />
       </div>

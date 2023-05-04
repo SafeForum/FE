@@ -13,15 +13,15 @@ import GET_SINGLE_PORTAL from "../../ApolloClient/gql/queries/cityPortal";
 
 const DashboardStatus = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { city, state, users } =
-    useContext(DashContext);
+  const { city, state, users } = useContext(DashContext);
   const [errors, setErrors] = useState([]);
+
 
   useEffect(() => {
     if (isLoading) {
       return "We stay loading";
     }
-  }, [isLoading])
+  }, [isLoading]);
 
   return (
     <div>
