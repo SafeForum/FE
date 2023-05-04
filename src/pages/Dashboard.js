@@ -24,7 +24,6 @@ const Dashboard = () => {
       portalId: cityPortal,
     },
     onCompleted: (data) => {
-      console.log("USER DATA: ", data.getSingleCityPortal)
       getPortalData(data.getSingleCityPortal);
     },
   });

@@ -9,12 +9,11 @@ const MessageBoard = () => {
   const { messageBoardId } = useContext(DashContext);
   const { getMessageBoardData, threads } = useContext(MessageBoardContext);
 
-  const { loading, error, data} = useQuery(GET_MESSAGE_BOARD, {
+  const { loading, error} = useQuery(GET_MESSAGE_BOARD, {
     variables: {
       messageBoardId: messageBoardId,
     },
     onCompleted: (data) => {
-      console.log("MB DATA: ", data.getMessageBoard)
       getMessageBoardData(data.getMessageBoard);
     },
   });
