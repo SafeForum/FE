@@ -8,12 +8,9 @@ const Threads = () => {
 
   return (
     <ul className="divide-y divide-gray-100">
-      {threads.map((thread) => (
-        <Link to="">
-          <li
-            key={thread._id}
-            className="flex justify-between gap-x-6 my-2 py-5 hover:shadow-md px-6 border rounded-md "
-          >
+      {threads.map((thread, i) => (
+        <Link to="" key={i}>
+          <li className="flex justify-between gap-x-6 my-2 py-5 hover:shadow-md px-6 border rounded-md ">
             <div className="flex gap-x-4">
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-900">
