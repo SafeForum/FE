@@ -9,11 +9,12 @@ const MessageBoard = () => {
   const { messageBoardId } = useContext(DashContext);
   const { getMessageBoardData, threads } = useContext(MessageBoardContext);
 
-  const { loading, error} = useQuery(GET_MESSAGE_BOARD, {
+  const { loading, error } = useQuery(GET_MESSAGE_BOARD, {
     variables: {
       messageBoardId: messageBoardId,
     },
     onCompleted: (data) => {
+
       getMessageBoardData(data.getMessageBoard);
     },
   });
@@ -24,7 +25,7 @@ const MessageBoard = () => {
   return (
     <div>
       <h1>MessageBoard</h1>
-      <Threads threads={threads} />
+      <Threads />
     </div>
   );
 };
