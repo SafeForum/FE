@@ -4,7 +4,9 @@ export const GET_MESSAGE_BOARD = gql`
   query GetMessageBoard($messageBoardId: String!) {
     getMessageBoard(messageBoardId: $messageBoardId) {
       threads {
+        _id
         subject
+        body
         creator {
           _id
           firstName
