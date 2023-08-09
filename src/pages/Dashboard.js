@@ -5,6 +5,7 @@ import { DashContext, DashContextProvider } from "../context/dashContext";
 import GET_SINGLE_PORTAL from "../ApolloClient/gql/queries/cityPortal";
 import DashboardStatus from "../components/dashboard/DashboardStatus";
 import MessageBoard from "../components/dashboard/MessageBoard";
+import ChatApp from "../components/chat/ChatApp";
 
 // What do we want to view on the dashboard?
 // 1. messageboard
@@ -36,6 +37,7 @@ const Dashboard = () => {
       <div className="w-10/12 mx-auto">
         <DashboardStatus />
         <MessageBoard />
+        <ChatApp />
       </div>
   );
 };

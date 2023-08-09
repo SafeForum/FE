@@ -23,7 +23,7 @@ const MessageBoard = () => {
   }
 
   return (
-    <div>
+    <div className="mb-24">
       <h1>MessageBoard</h1>
       <Threads />
     </div>

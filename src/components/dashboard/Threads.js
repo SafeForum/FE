@@ -12,9 +12,8 @@ const Threads = () => {
     <ul className="divide-y divide-gray-100">
       {threads.map((thread, i) => (
         <Link to={`/dashboard/${cityPortal}/threads/${thread._id}`} key={i}>
-          <li className="flex justify-between gap-x-6 my-2 py-5 hover:shadow-md px-6 border rounded-md ">
-            <div className="flex gap-x-4">
-              <div className="min-w-0 flex-auto">
+          <li className="gap-x-6 my-2 py-2 hover:shadow-md px-6 border rounded-md ">
+            <div className="flex flex-row gap-x-4">
                 <p className="text-sm font-semibold leading-6 text-gray-900">
                   {thread.subject}
                 </p>
@@ -24,7 +23,6 @@ const Threads = () => {
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                   {thread.creator.firstName} {thread.creator.lastName}
                 </p>
-              </div>
             </div>
           </li>
         </Link>
